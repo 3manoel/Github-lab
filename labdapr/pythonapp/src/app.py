@@ -1,5 +1,5 @@
 from flask import Flask
-from src.controllers.orders_controller import OrdersController
+from controllers.orders_controller import OrdersController
 
 app = Flask(__name__)
 
