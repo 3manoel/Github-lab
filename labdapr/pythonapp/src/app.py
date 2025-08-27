@@ -1,10 +1,14 @@
 from flask import Flask
 from controllers.orders_controller import OrdersController
+import sys
 
 app = Flask(__name__)
 
 # Initialize the OrdersController
 orders_controller = OrdersController()
+
+# Debug statement to print the Python module search paths
+print("PYTHONPATH:", sys.path)
 
 @app.route('/orders', methods=['POST'])
 def create_order():
