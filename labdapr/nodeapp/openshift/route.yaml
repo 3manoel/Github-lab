@@ -1,0 +1,11 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: nodeapp-route
+spec:
+  to:
+    kind: Service
+    name: nodeapp-service
+  port:
+    targetPort: http
+  wildcardPolicy: None
