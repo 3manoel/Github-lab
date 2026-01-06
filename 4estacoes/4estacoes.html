@@ -1,0 +1,532 @@
+<!--
+  Página completa: Programa 4 Estações
+  Antes de publicar:
+   - Substitua YOUR_WHATSAPP_NUMBER pelo seu número (ex: 5511999999999)
+   - Substitua '#PAYMENT_LINK' em openPaymentLink() pelo link real do checkout quando tiver
+   - Substitua logo.png e hero.jpg pelas imagens no seu servidor
+   - Substitua placeholders das fotos dos depoimentos se tiver URLs reais
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Programa 4 Estações — Luciana Francisco | Nutricionista Clínica (USP)</title>
+  <meta name="description" content="Programa 4 Estações: 90 dias para destravar o emagrecimento, reduzir refluxo, díarreia, compulsão e organizar sua rotina alimentar com clareza e evidência." />
+  <style>
+    /* ---------- PALETA E TIPOGRAFIA ---------- */
+    :root{
+      --terracota:#C47A4A;
+      --nude:#F5ECE5;
+      --rose:#EBC7D9;
+      --azul:#AFC7D8;
+      --dourado:#F7D388;
+      --bg:#fff;
+      --text:#222;
+      --muted:#6b6b6b;
+      --container:1100px;
+      font-family: "Lato", Arial, sans-serif;
+    }
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--nude) 0%, #fff 100%);color:var(--text);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--container);margin:28px auto;padding:28px}
+    header{display:flex;align-items:center;gap:18px}
+    header img.logo{width:68px;height:68px;border-radius:12px;object-fit:cover}
+    header h1{margin:0;font-family:"Playfair Display",serif;font-size:26px;color:var(--terracota)}
+    header .sub{color:var(--muted);font-size:14px}
+    .hero{display:flex;gap:24px;align-items:center;margin-top:18px}
+    .hero .text{flex:1}
+    .hero h2{font-family:"Playfair Display",serif;font-size:32px;margin:0 0 8px;color:#3b3b3b}
+    .hero p.lead{margin:0;color:var(--muted);max-width:720px}
+    .badges{display:flex;gap:10px;margin:14px 0}
+    .badge{background:var(--rose);padding:6px 12px;border-radius:20px;font-weight:600;color:#5a2e38;font-size:13px}
+    .columns{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:28px}
+    .card{background:#fff;border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:10px;background:var(--dourado);color:#5a3b00;font-weight:700;margin-bottom:10px;font-size:13px}
+    h3{margin:0 0 12px;font-size:18px}
+    ul.check{padding-left:18px;margin:0}
+    .cta-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:700;text-decoration:none}
+    .btn-whats{background:#25d366;color:#fff}
+    .btn-pay{background:var(--terracota);color:#fff}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+    .feature{display:flex;gap:10px;align-items:flex-start}
+    .feature .icon{font-size:20px}
+    footer{margin-top:32px;text-align:center;color:var(--muted);font-size:14px}
+    .section-title{display:flex;align-items:center;gap:12px}
+    .station{display:flex;gap:8px;align-items:center;padding:8px 12px;border-radius:10px;font-weight:700}
+    .outono{background:linear-gradient(90deg,var(--terracota),#db8b61);color:#fff}
+    .inverno{background:linear-gradient(90deg,var(--azul),#cfe6f0);color:#07324a}
+    .primavera{background:linear-gradient(90deg,var(--rose),#f1d7e6);color:#5a2e38}
+    .verao{background:linear-gradient(90deg,var(--dourado),#fbe6a8);color:#5a3b00}
+    .muted{color:var(--muted)}
+    /* testimonials */
+    .testi-track { display:flex; gap:14px; overflow:hidden; scroll-behavior:smooth; padding:6px 0; }
+    .testi-card{min-width:360px;max-width:360px;background:#fff;border-radius:12px;padding:14px;box-shadow:0 8px 20px rgba(0,0,0,.06)}
+    .testi-card img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid #F5ECE5}
+    .testi-controls{display:flex;align-items:center;gap:8px}
+    .testi-dots{margin-top:12px;display:flex;gap:8px;justify-content:center}
+    /* responsive */
+    @media (max-width:1100px){.wrap{padding:16px}.columns{grid-template-columns:1fr}.hero{flex-direction:column}.hero img{width:100%;max-width:420px}}
+    @media (max-width:520px){.testi-card{min-width:280px;max-width:280px}}
+    /* modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:9999}
+    .modal .box{background:#fff;padding:20px;border-radius:10px;max-width:420px;width:92%}
+    .pay-opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .pay-opts button{padding:8px 10px;border-radius:8px;border:1px solid #eee;background:#fafafa;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Header -->
+    <header>
+      <img class="logo" src="logo.png" alt="Logo (substitua logo.png)" />
+      <div>
+        <h1>Programa 4 Estações</h1>
+        <div class="sub">90 dias • Destrave, ative e consolide com clareza clínica</div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="text">
+        <h2>Destrave seu emagrecimento. Reduza sintomas. Mantenha resultados.</h2>
+        <p class="lead">Um acompanhamento clínico de 90 dias para adultos que querem organizar a rotina alimentar, reduzir refluxo/diarreia/compulsão e construir constância possível, sem extremismos — com explicação clara da fisiologia.</p>
+
+        <div class="badges">
+          <span class="badge">10 vagas/mês</span>
+          <span class="badge">Cardápio terapêutico</span>
+          <span class="badge">Check-ins semanais</span>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-whats" href="https://wa.me/YOUR_WHATSAPP_NUMBER?text=Ol%C3%A1%2C%20quero%20saber%20sobre%20o%20Programa%204%20Esta%C3%A7%C3%B5es" target="_blank" rel="noopener noreferrer">💬 Conversar no WhatsApp</a>
+          <button class="btn btn-pay" id="openPay">💳 Quero garantir (Pagamento)</button>
+        </div>
+
+        <div style="margin-top:12px" class="muted">Valor: <strong>R$ 1.250</strong> • ou <strong>3x de R$ 450</strong></div>
+      </div>
+
+      <img src="hero.jpg" alt="Mulher confiante" style="width:320px;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.08);object-fit:cover">
+    </div>
+
+    <!-- Conteúdo -->
+    <div class="columns" style="margin-top:24px">
+      <main>
+        <!-- Quem é para -->
+        <div class="card">
+          <div class="section-title">
+            <div class="pill">Para quem</div>
+            <h3>Quem se beneficia deste acompanhamento</h3>
+          </div>
+          <p class="muted">Adultos com problemas metabólicos, sintomas gastrointestinais, compulsão alimentar, fadiga ou que simplesmente não conseguem criar uma rotina alimentar sustentável. Trabalho com casos clínicos complexos — sempre com explicação fisiológica e plano possível.</p>
+          <ul class="check">
+            <li>Obesidade, pré-diabetes, resistência à insulina</li>
+            <li>SOP, esteatose hepática, perfil lipídico alterado</li>
+            <li>Refluxo, gases, diarreia, constipação</li>
+            <li>Compulsão noturna e desregulação da fome</li>
+            <li>Pessoas que querem clareza sem terrorismo nutricional</li>
+          </ul>
+        </div>
+
+        <!-- Jornada -->
+        <div class="card" style="margin-top:14px">
+          <div class="section-title">
+            <div class="pill">O método</div>
+            <h3>O que é o Programa 4 Estações</h3>
+          </div>
+          <p class="muted">90 dias de acompanhamento clínico baseado em evidência, fisiologia e orientações práticas. Dividido em 4 etapas focadas em redução de sintomas, ajuste comportamental, ativação metabólica e manutenção.</p>
+
+          <div style="margin-top:12px">
+            <h4 style="margin:10px 0 6px"><span class="outono station">🍂 Outono</span> Ajustes iniciais e redução de sintomas</h4>
+            <p class="muted">Avaliação completa, cardápio anti-inflamatório e organização prática para reduzir refluxo, gases e compulsão noturna.</p>
+
+            <h4 style="margin:10px 0 6px"><span class="inverno station">❄️ Inverno</span> Trabalhar sabotadores e rotina</h4>
+            <p class="muted">Identificação de gatilhos, técnica da pausa e estratégias de saciedade.</p>
+
+            <h4 style="margin:10px 0 6px"><span class="primavera station">🌸 Primavera</span> Ativação metabólica</h4>
+            <p class="muted">Cardápio de ativação, foco em proteína e treino de força com personal parceiro.</p>
+
+            <h4 style="margin:10px 0 6px"><span class="verao station">☀️ Verão</span> Consolidação</h4>
+            <p class="muted">Plano de manutenção, blindagem de finais de semana e plano de continuidade (Ciclo Verão).</p>
+          </div>
+        </div>
+
+        <!-- Entregáveis -->
+        <div class="card" style="margin-top:14px">
+          <h3>O que você recebe</h3>
+          <ul class="check">
+            <li><strong>5 consultas clínicas</strong> (60 min) — avaliação, ajustes e revisão</li>
+            <li><strong>Cardápio Terapêutico Personalizado</strong> com explicações clínicas</li>
+            <li><strong>Check-ins semanais</strong> com missões práticas</li>
+            <li><strong>Suporte organizado no WhatsApp</strong> (horário definido)</li>
+            <li><strong>Avaliação inicial e final</strong> (bioimpedância ou protocolo por fotos para online)</li>
+          </ul>
+        </div>
+
+        <!-- Bônus -->
+        <div class="card" style="margin-top:14px">
+          <h3>Bônus incluídos</h3>
+          <ul class="check">
+            <li>Treino personalizado com personal parceiro</li>
+            <li>Missões semanais clínicas (12 missões)</li>
+            <li>Planner 4 Estações (digital)</li>
+            <li>Kit Rotina Possível (PDF)</li>
+            <li>Checklist Anti-Sabotagem + SOS Emocional</li>
+            <li>Manual pré e pós-consulta</li>
+          </ul>
+        </div>
+
+        <!-- Autoridade -->
+        <div class="card" style="margin-top:14px">
+          <h3>Quem é a Nutricionista</h3>
+          <p><strong>Luciana Francisco</strong> — Nutricionista clínica formada pela <strong>Universidade de São Paulo (USP)</strong>. Atua com adultos em obesidade e doenças metabólicas (pré-diabetes, resistência à insulina, SOP, esteatose), além de sintomas gastrointestinais como refluxo, diarreia e gases.</p>
+          <p class="muted">Meu trabalho é baseado em evidências e explicações fisiológicas simples. Entrego cardápios terapêuticos personalizados, com orientação prática e inclusão estratégica de alimentos afetivos. Atendimento humano, direto e sem terrorismo nutricional.</p>
+        </div>
+
+        <!-- Depoimentos: CARROSSEL -->
+        <div style="margin-top:18px">
+          <section id="testimonials" aria-label="Depoimentos" style="padding:18px 0;background:linear-gradient(180deg,#fff, #F9F2E6);border-radius:12px">
+            <div style="max-width:1000px;margin:0 auto;padding:8px 12px">
+              <h3 style="font-family:Playfair Display, serif;color:var(--terracota);margin-bottom:6px">Elas já passaram pelo 4 Estações</h3>
+              <p class="muted" style="margin-top:0;margin-bottom:12px">Depoimentos reais do Google Meu Negócio.</p>
+
+              <div style="display:flex;align-items:center;gap:10px">
+                <button class="testi-prev" aria-label="Anterior" title="Anterior" style="background:#fff;border:1px solid #eee;padding:8px;border-radius:8px;margin-right:8px;cursor:pointer">‹</button>
+
+                <div class="testi-track" >
+                  <!-- ========== INÍCIO: SEUS 13 DEPOIMENTOS FORMATADOS ========== -->
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="Ana Laura"/>
+                      <div>
+                        <strong>Ana Laura</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • Há 1 semana</div>
+                      </div>
+                    </div>
+                    <p>"Profissional maravilhosa, te acompanha durante todo o tratamento nutricional, te passa um monte de conteúdo e dicas alimentares extras, super atenciosa. Dá pra ver que ela realmente se importa e tem gosto pela profissão!"</p>
+                  </article>
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="Mariana Ogrin"/>
+                      <div>
+                        <strong>Mariana Ogrin</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • Há 5 semanas</div>
+                      </div>
+                    </div>
+                    <p>"Extremamente sensível e com atendimento personalizado, você se sente acolhido desde o início. além do acompanhamento diário para que você tenha uma reeducação alimentar completa. vai muito além de tudo que conheci como nutricionista ♡"</p>
+                  </article>
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="Rafael Rodrigues"/>
+                      <div>
+                        <strong>Rafael Rodrigues</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • Há 6 semanas</div>
+                      </div>
+                    </div>
+                    <p>"Excelente profissional, pontual, muito conhecimento e ajuda a gente a conquistas os resultados! Recomendo!"</p>
+                  </article>
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="Bruna Cavalcante"/>
+                      <div>
+                        <strong>Bruna Cavalcante</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • Há 9 semanas</div>
+                      </div>
+                    </div>
+                    <p>"Nutri maravilhosa. Não te deixa passar fome. Monta um cardápio que você consegue seguir. Além de ser super prestativa e atenciosa. Faz por amor."</p>
+                  </article>
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="Rubia Ponsoni"/>
+                      <div>
+                        <strong>Rubia Ponsoni</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • Há 16 semanas</div>
+                      </div>
+                    </div>
+                    <p>"A Lu é uma nutricionista maravilhosa e humana! Não é daquelas que te deixa com fome kkk mas te ajuda a fazer ótimas escolha para alcançar seu objetivo. Me fez olhar a comida com amor e fazer escolhas corretas."</p>
+                  </article>
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="Sabrina Bello"/>
+                      <div>
+                        <strong>Sabrina Bello</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • Há 25 semanas</div>
+                      </div>
+                    </div>
+                    <p>"Excelente profissional! Estou adorando passar com a Lu, nutricionista muito acolhedora, ouve e auxilia nas nossas dúvidas e faz um acompanhamento e plano alimentar super personalizado. Recomendo demais."</p>
+                  </article>
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="Michele Costa dos Santos"/>
+                      <div>
+                        <strong>Michele Costa dos Santos</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • Há 30 semanas</div>
+                      </div>
+                    </div>
+                    <p>"A Luciana foi um achado! Recomendo muito! Uma ótima profissional como poucas que já conheci. Muito atenciosa, explica tudo perfeitamente e de forma clara e didática! Consegui resultados muito rápidos e hoje me alimento muito melhor, tenho disposição, perdi peso e obtive resultados que sempre desejei!"</p>
+                  </article>
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="Mariane Mazi"/>
+                      <div>
+                        <strong>Mariane Mazi</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • Há 34 semanas</div>
+                      </div>
+                    </div>
+                    <p>"Excelência define a Dra. Luciana. Profissional competente, dedicada e comprometida. Além de ser super atualizada e conhecedora de diversas estratégias de emagrecimento e saúde. Recomendo fortemente a profissional!"</p>
+                  </article>
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="Luis Carlos"/>
+                      <div>
+                        <strong>Luis Carlos</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • Há 37 semanas</div>
+                      </div>
+                    </div>
+                    <p>"Gostaria de agradecer à nutricionista Luciana pelo excelente trabalho e dedicação. Sua abordagem atenciosa e personalizada fez toda a diferença para minha saúde e bem-estar. Com suas orientações, consegui entender melhor como me alimentar de forma equilibrada e sustentável, alcançando resultados incríveis."</p>
+                  </article>
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="Daniele de Oliveira"/>
+                      <div>
+                        <strong>Daniele de Oliveira</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • 12 de set. de 2024</div>
+                      </div>
+                    </div>
+                    <p>"Acredito muito no trabalho multidisciplinar, sou psicóloga e indico ela para muitos dos meus pacientes. Ela é sensível, traz um atendimento individualizado e realista! Excelente profissional!"</p>
+                  </article>
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="Dalyla Mendes"/>
+                      <div>
+                        <strong>Dalyla Mendes</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • 7 de set. de 2024</div>
+                      </div>
+                    </div>
+                    <p>"Parabéns pelo seu trabalho e dedicação! Obrigada por nos ajudar a encontrar o equilíbrio através da alimentação, Você é uma inspiração para todos que buscam uma vida saudável. Nutri, seu carinho é o tempero que faz a alimentação ser mais leve."</p>
+                  </article>
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="ricey always ricey"/>
+                      <div>
+                        <strong>ricey always ricey</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • 6 de set. de 2024</div>
+                      </div>
+                    </div>
+                    <p>"Ótima nutricionista, me ajudou a emagrecer e me fez uma pessoa mais saudável, sem falar que ela é ótima com seu trabalho e com suas orientações e nunca deixa os pacientes dela na mão mesmo nas piores situações como a minha antigamente."</p>
+                  </article>
+
+                  <article class="testi-card" >
+                    <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+                      <img src="https://via.placeholder.com/56" alt="Kamilly Vitoria"/>
+                      <div>
+                        <strong>Kamilly Vitoria</strong>
+                        <div style="color:#F7D388;font-weight:700">★★★★★ • 25 de jun. de 2024</div>
+                      </div>
+                    </div>
+                    <p>"Minha experiência não poderia ser melhor, sinto-me super confiante e bem comigo mesma, além de ótima profissional é super simpática e humana. Recomendo muito!"</p>
+                  </article>
+
+                  <!-- ========== FIM DEPOIMENTOS ========== -->
+                </div>
+
+                <button class="testi-next" aria-label="Próximo" title="Próximo" style="background:var(--terracota);color:#fff;border:0;padding:8px 10px;border-radius:8px;cursor:pointer">›</button>
+              </div>
+
+              <div class="testi-dots" id="testimonial-dots"></div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Garantia -->
+        <div class="card" style="margin-top:18px">
+          <h3>Garantia de conforto</h3>
+          <p class="muted">Se nos primeiros 10 dias você sentir que não está conseguindo se organizar, reestruturamos o plano até encontrar uma rotina possível. Garantia emocional, não financeira.</p>
+        </div>
+
+        <!-- CTA final -->
+        <div class="card" style="margin-top:18px;text-align:center">
+          <h3>Pronto(a) para começar?</h3>
+          <p class="muted">Vagas limitadas. A transformação clínica exige acompanhamento real.</p>
+          <div style="margin-top:12px">
+            <a class="btn btn-whats" href="https://wa.me/YOUR_WHATSAPP_NUMBER?text=Ol%C3%A1%2C%20quero%20garantir%20minha%20vaga%20no%204%20Esta%C3%A7%C3%B5es" target="_blank">💬 Falar agora</a>
+            <button class="btn btn-pay" id="openPay3">💳 Garantir vaga</button>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="card">
+          <h3>Resumo Rápido</h3>
+          <p class="muted">90 dias • 5 consultas • Check-ins semanais • Cardápio Terapêutico • Bônus</p>
+          <div style="margin-top:12px">
+            <div class="pill">Vagas limitadas</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <strong>Como garantir:</strong>
+            <ol class="muted">
+              <li>Converse no WhatsApp</li>
+              <li>Escolha forma de pagamento</li>
+              <li>Reserve sua vaga</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3>FAQ rápido</h3>
+          <p class="muted"><strong>P:</strong> Moro longe, funciona online?<br><strong>R:</strong> Sim — uso protocolo por fotos e check-ins semanais.</p>
+          <p class="muted"><strong>P:</strong> E bioimpedância para online?<br><strong>R:</strong> Substituo por avaliação visual padronizada + medidas e fotos.</p>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3>Contato</h3>
+          <p class="muted">WhatsApp: <a href="https://wa.me/YOUR_WHATSAPP_NUMBER">Clique para falar</a></p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © <span id="year"></span> Luciana Francisco — Nutricionista Clínica (USP) • CRN XXX
+    </footer>
+  </div>
+
+  <!-- Modal de pagamento simples -->
+  <div id="payModal" class="modal" aria-hidden="true">
+    <div class="box">
+      <h3>Escolha sua forma de pagamento</h3>
+      <p class="muted">Se já tem link de pagamento, clique em "Pagar agora". Se não, escolha PIX/transferência e siga as instruções.</p>
+      <div class="pay-opts">
+        <button onclick="openPaymentLink()">Pagar agora (link)</button>
+        <button onclick="showPix()">PIX / Transferência</button>
+        <button onclick="contactWhats()">Falar com a gente</button>
+      </div>
+      <div id="pixArea" style="display:none;margin-top:12px">
+        <p class="muted">PIX (temporário):</p>
+        <p><strong>Chave PIX:</strong> sua-chave-pix@banco</p>
+        <p class="muted">Envie o comprovante no WhatsApp após o pagamento.</p>
+      </div>
+      <div style="margin-top:12px;text-align:right">
+        <button onclick="closeModal()" class="btn">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Payment modal
+    function openModal(){ document.getElementById('payModal').style.display='flex' }
+    function closeModal(){ document.getElementById('payModal').style.display='none' }
+    document.getElementById('openPay').addEventListener('click', openModal);
+    document.getElementById('openPay2')?.addEventListener('click', openModal);
+    document.getElementById('openPay3').addEventListener('click', openModal);
+
+    function openPaymentLink(){
+      // substitua o '#' abaixo pelo seu link de pagamento real
+      var link = '#PAYMENT_LINK';
+      if(link === '#' || link === '') {
+        alert('Você ainda não configurou o link de pagamento. Escolha PIX/transferência ou fale no WhatsApp.');
+        return;
+      }
+      window.open(link, '_blank');
+    }
+    function showPix(){
+      document.getElementById('pixArea').style.display = 'block';
+    }
+    function contactWhats(){
+      window.open('https://wa.me/YOUR_WHATSAPP_NUMBER?text=Ol%C3%A1%2C%20quero%20garantir%20minha%20vaga%20no%204%20Esta%C3%A7%C3%B5es', '_blank');
+    }
+    // fechar modal ao clicar fora
+    document.getElementById('payModal').addEventListener('click', function(e){
+      if(e.target === this) closeModal();
+    });
+
+    /* CARROSSEL DE DEPOIMENTOS */
+    (function(){
+      const track = document.querySelector('.testi-track');
+      const prev = document.querySelector('.testi-prev');
+      const next = document.querySelector('.testi-next');
+      const dotsContainer = document.getElementById('testimonial-dots');
+      if(!track) return;
+      let autoplay = true;
+      const delay = 4500;
+
+      function initDots(){
+        dotsContainer.innerHTML = '';
+        const cards = track.querySelectorAll('.testi-card');
+        for(let i=0;i<cards.length;i++){
+          const d = document.createElement('button');
+          d.className = 'dot';
+          d.style.width='10px'; d.style.height='10px'; d.style.borderRadius='50%';
+          d.style.border='0'; d.style.background = i===0 ? 'var(--terracota)' : '#eee';
+          d.setAttribute('data-index', i);
+          dotsContainer.appendChild(d);
+        }
+      }
+      initDots();
+
+      function scrollToIndex(i){
+        const cards = track.querySelectorAll('.testi-card');
+        const card = cards[i];
+        if(!card) return;
+        track.scrollLeft = card.offsetLeft - track.offsetLeft;
+        Array.from(dotsContainer.children).forEach((btn, idx)=> btn.style.background = idx===i ? 'var(--terracota)' : '#eee');
+      }
+
+      prev.addEventListener('click', ()=>{
+        const cards = track.querySelectorAll('.testi-card');
+        const visibleIndex = Math.round(track.scrollLeft / (cards[0].offsetWidth + 14));
+        const target = Math.max(0, visibleIndex - 1);
+        scrollToIndex(target);
+      });
+
+      next.addEventListener('click', ()=>{
+        const cards = track.querySelectorAll('.testi-card');
+        const visibleIndex = Math.round(track.scrollLeft / (cards[0].offsetWidth + 14));
+        const target = Math.min(cards.length - 1, visibleIndex + 1);
+        scrollToIndex(target);
+      });
+
+      dotsContainer.addEventListener('click', (e)=>{
+        if(e.target && e.target.dataset && e.target.dataset.index) {
+          scrollToIndex(parseInt(e.target.dataset.index));
+        }
+      });
+
+      let autoTimer;
+      function startAuto(){
+        if(!autoplay) return;
+        autoTimer = setInterval(()=>{
+          const cards = track.querySelectorAll('.testi-card');
+          const visibleIndex = Math.round(track.scrollLeft / (cards[0].offsetWidth + 14));
+          const target = visibleIndex + 1 >= cards.length ? 0 : visibleIndex + 1;
+          scrollToIndex(target);
+        }, delay);
+      }
+      function stopAuto(){ clearInterval(autoTimer); }
+      track.addEventListener('mouseenter', stopAuto);
+      track.addEventListener('mouseleave', startAuto);
+      startAuto();
+
+      // recompute dots if cards change
+      const obs = new MutationObserver(()=>{ initDots(); });
+      obs.observe(track, {childList:true});
+    })();
+  </script>
+</body>
+</html>

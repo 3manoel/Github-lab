@@ -1,0 +1,257 @@
+<!--
+  Cole este conteúdo em uma nova página HTML do seu site (ex: /4estacoes.html)
+  Substitua:
+   - YOUR_WHATSAPP_NUMBER -> seu número (ex: 5511999999999)
+   - #PAYMENT_LINK -> seu link de pagamento (Hotmart, PagSeguro, MercadoPago, etc.)
+   - logo.png / hero.jpg -> arquivos de imagem no seu servidor
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Programa 4 Estações — [Seu Nome]</title>
+  <meta name="description" content="Programa 4 Estações — 90 dias para destravar, ativar e consolidar seu emagrecimento com leveza." />
+  <style>
+    /* PALLETA: terracota, rosê, azul gelo, dourado */
+    :root{
+      --terracota:#C47A4A;
+      --nude:#F5ECE5;
+      --rose:#EBC7D9;
+      --azul:#AFC7D8;
+      --dourado:#F7D388;
+      --bg:#fff;
+      --text:#222;
+      --muted:#6b6b6b;
+      --container:1100px;
+      font-family: "Lato", Arial, sans-serif;
+    }
+    body{margin:0;background:linear-gradient(180deg,var(--nude) 0%, #fff 100%);color:var(--text);line-height:1.5}
+    .wrap{max-width:var(--container);margin:28px auto;padding:28px}
+    header{display:flex;align-items:center;gap:18px}
+    header img.logo{width:68px;height:68px;border-radius:12px;object-fit:cover}
+    header h1{margin:0;font-family:"Playfair Display",serif;font-size:28px;color:var(--terracota)}
+    .hero{display:flex;gap:24px;align-items:center;margin-top:18px}
+    .hero .text{flex:1}
+    .hero h2{font-family:"Playfair Display",serif;font-size:34px;margin:0 0 8px}
+    .hero p.lead{margin:0;color:var(--muted);max-width:720px}
+    .hero img{width:320px;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.08);object-fit:cover}
+    .badges{display:flex;gap:10px;margin:14px 0}
+    .badge{background:var(--rose);padding:6px 12px;border-radius:20px;font-weight:600;color:#5a2e38}
+    .columns{display:grid;grid-template-columns:1fr 360px;gap:24px}
+    .card{background:#fff;border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:10px;background:var(--dourado);color:#5a3b00;font-weight:700;margin-bottom:10px}
+    h3{margin:0 0 12px;font-size:18px}
+    ul.check{padding-left:18px}
+    .cta-row{display:flex;gap:12px;margin-top:18px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+    .btn-whats{background:#25d366;color:#fff}
+    .btn-pay{background:var(--terracota);color:#fff}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+    .feature{display:flex;gap:10px;align-items:flex-start}
+    .feature .icon{font-size:20px}
+    footer{margin-top:32px;text-align:center;color:var(--muted);font-size:14px}
+    .section-title{display:flex;align-items:center;gap:12px}
+    .station{display:flex;gap:8px;align-items:center;padding:8px 12px;border-radius:10px;font-weight:700}
+    .outono{background:linear-gradient(90deg,var(--terracota),#db8b61);color:#fff}
+    .inverno{background:linear-gradient(90deg,var(--azul),#cfe6f0);color:#07324a}
+    .primavera{background:linear-gradient(90deg,var(--rose),#f1d7e6);color:#5a2e38}
+    .verao{background:linear-gradient(90deg,var(--dourado),#fbe6a8);color:#5a3b00}
+    /* responsive */
+    @media (max-width:880px){.columns{grid-template-columns:1fr}.hero img{width:220px}.features{grid-template-columns:1fr}}
+    /* modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center}
+    .modal .box{background:#fff;padding:20px;border-radius:10px;max-width:420px;width:92%}
+    .muted{color:var(--muted)}
+    .mt6{margin-top:6px;}
+    .footer-contact{margin-top:6px;}
+    .mt12{margin-top:12px;}
+    .mt14{margin-top:14px;}
+    .mt24{margin-top:24px;}
+    .text-right{text-align:right;}
+    /* payment helper */
+    #pixArea{display:none;margin-top:12px;}
+    .pay-opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .pay-opts button{padding:8px 10px;border-radius:8px;border:1px solid #eee;background:#fafafa;cursor:pointer}
+  </style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <!-- substitua logo.png -->
+      <img class="logo" src="logo.png" alt="Logo">
+      <div>
+        <h1>Programa 4 Estações</h1>
+        <div class="muted">90 dias — destrave, ative e consolide</div>
+      </div>
+    </header>
+
+    <div class="hero">
+      <div class="text">
+        <h2>Destrave o emagrecimento e mantenha sua nova versão</h2>
+        <p class="lead">Um método em 3 fases técnicas e 4 estações emocionais para mulheres que querem emagrecer com leveza, sem recomeços. Acompanhamento semanal, cardápio terapêutico exclusivo e suporte real.</p>
+
+        <div class="badges">
+          <span class="badge">10 vagas/mês</span>
+          <span class="badge">90 dias</span>
+          <span class="badge">Cardápio Terapêutico</span>
+        </div>
+
+        <div class="cta-row">
+          <!-- WhatsApp: substitua YOUR_WHATSAPP_NUMBER -->
+          <a class="btn btn-whats" href="https://wa.me/YOUR_WHATSAPP_NUMBER?text=Ol%C3%A1%2C%20quero%20saber%20sobre%20o%204%20Esta%C3%A7%C3%B5es" target="_blank" rel="noopener noreferrer">
+            💬 Conversar no WhatsApp
+          </a>
+          <!-- Pagamento: substitua #PAYMENT_LINK com seu link quando tiver -->
+        </div>
+
+        <div class="muted mt12">Valor: <strong>R$ 1.250</strong> • ou <strong>3x R$ 450</strong></div>
+      </div>
+      </div>
+
+      <!-- substitua hero.jpg -->
+      <img src="hero.jpg" alt="Mulher confiante">
+    <div class="columns">
+    <div class="columns mt24">
+      <div>
+      <div>
+        <div class="card">
+          <div class="section-title">
+            <div class="pill">O que inclui</div>
+            <h3>Entregáveis principais</h3>
+          </div>
+
+          <ul class="check">
+            <li><strong>5 consultas estratégicas</strong> (1 por estação + final)</li>
+          </ul>
+
+          <div class="features mt12">
+            <div class="feature"><div class="icon">🍂</div><div><strong>Outono:</strong> preparo e desinflamação</div></div>
+            <div class="feature"><div class="icon">❄</div><div><strong>Inverno:</strong> força emocional</div></div>
+            <div class="feature"><div class="icon">🌸</div><div><strong>Primavera:</strong> ativação</div></div>
+            <div class="feature"><div class="icon">☀</div><div><strong>Verão:</strong> manutenção</div></div>
+          </div>
+        </div>
+            <div class="feature"><div class="icon">🌸</div><div><strong>Primavera:</strong> ativação</div></div>
+            <div class="feature"><div class="icon">☀</div><div><strong>Verão:</strong> manutenção</div></div>
+          </div>
+        </div>
+
+        <div class="card mt14">
+          <h3>Para quem</h3>
+          <p class="muted">Mulheres cansadas, mães sobrecarregadas e mulheres que já tentaram de tudo. Se você quer parar de recomeçar e quer um processo que caiba na sua vida, esse é o programa.</p>
+          <div class="mt12">
+            <a class="btn btn-whats" href="https://wa.me/YOUR_WHATSAPP_NUMBER?text=Ol%C3%A1%2C%20quero%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%204%20Esta%C3%A7%C3%B5es" target="_blank">💬 Falar agora</a>
+            <button class="btn btn-pay" id="openPay2">💳 Quero garantir</button>
+          </div>
+          <div style="margin-top:12px">
+            <a class="btn btn-whats" href="https://wa.me/YOUR_WHATSAPP_NUMBER?text=Ol%C3%A1%2C%20quero%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%204%20Esta%C3%A7%C3%B5es" target="_blank">💬 Falar agora</a>
+        <div class="card mt14">
+          <h3>Garantia</h3>
+          <p class="muted">Se nos primeiros 10 dias você sentir que não está conseguindo se organizar, eu reestruturo seu plano sem custo adicional até encontrar uma rotina possível para você.</p>
+        </div>
+        <div class="card" style="margin-top:14px">
+        <div class="card mt14">
+          <h3>Depoimentos</h3>
+          <p class="muted">Coloque aqui depoimentos reais (quando tiver). Se preferir, eu posso criar 3 depoimentos modelo para usar enquanto não tem os reais.</p>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <h3>Depoimentos</h3>
+          <p class="muted">Coloque aqui depoimentos reais (quando tiver). Se preferir, eu posso criar 3 depoimentos modelo para usar enquanto não tem os reais.</p>
+        <div class="card">
+          <h3>Resumo Rápido</h3>
+          <p class="muted">90 dias • 5 encontros • Check-ins semanais • Cardápio terapêutico • Bônus</p>
+          <div class="mt12">
+            <div class="pill">Vagas limitadas</div>
+          </div>
+          <p class="muted">90 dias • 5 encontros • Check-ins semanais • Cardápio terapêutico • Bônus</p>
+          <div class="mt12">
+            <strong>Como garantir:</strong>
+            <ol class="muted">
+              <li>Converse no WhatsApp</li>
+              <li>Escolha forma de pagamento</li>
+              <li>Assine e reserve sua vaga</li>
+            </ol>
+          </div>
+              <li>Escolha forma de pagamento</li>
+              <li>Assine e reserve sua vaga</li>
+        <div class="card mt12">
+          <h3>Bonuses (valor percebido)</h3>
+          <ul class="muted">
+            <li>Treino personalizado — R$197</li>
+            <li>Missões semanais — R$150</li>
+            <li>Planner 4 Estações — R$147</li>
+            <li>Kit Rotina Possível — R$97</li>
+            <li>Checklist Anti-Sabotagem — R$67</li>
+          </ul>
+        </div>
+            <li>Kit Rotina Possível — R$97</li>
+        <div class="card mt12">
+          <h3>FAQ rápido</h3>
+          <p class="muted"><strong>P:</strong> Eu moro longe, funciona online?<br><strong>R:</strong> Sim — usamos avaliação por fotos e check-ins. (Veja info no PDF.)</p>
+        </div>
+        <div class="card mt12">
+          <h3>FAQ rápido</h3>
+          <p class="muted"><strong>P:</strong> Eu moro longe, funciona online?<br><strong>R:</strong> Sim — usamos avaliação por fotos e check-ins. (Veja info no PDF.)</p>
+    <footer>
+      © <span id="year"></span> [Seu Nome] • Nutricionista • CRN XXX  
+      <div class="muted mt6">Contato: <a href="https://wa.me/YOUR_WHATSAPP_NUMBER">WhatsApp</a></div>
+    <footer>
+      © <span id="year"></span> [Seu Nome] • Nutricionista • CRN XXX  
+      <div class="muted footer-contact">Contato: <a href="https://wa.me/YOUR_WHATSAPP_NUMBER">WhatsApp</a></div>
+    </footer>
+    </footer>
+  </div>
+
+  <!-- Modal de pagamento simples -->
+      <div class="pay-opts">
+        <button onclick="openPaymentLink()">Pagar agora (link)</button>
+        <button onclick="showPix()">PIX / Transferência</button>
+        <button onclick="contactWhats()">Falar com a gente</button>
+      </div>
+      <div id="pixArea">
+        <p class="muted">PIX (temporário):</p>
+        <p><strong>Chave PIX:</strong> sua-chave-pix@banco</p>
+        <p class="muted">Envie o comprovante no WhatsApp após o pagamento.</p>
+      </div>
+      <div class="mt12 text-right">
+        <button onclick="closeModal()" class="btn">Fechar</button>
+      </div>
+      </div>
+      <div style="margin-top:12px;text-align:right">
+        <button onclick="closeModal()" class="btn">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function openModal(){ document.getElementById('payModal').style.display='flex' }
+    function closeModal(){ document.getElementById('payModal').style.display='none' }
+    document.getElementById('openPay').addEventListener('click', openModal);
+    document.getElementById('openPay2').addEventListener('click', openModal);
+
+    function openPaymentLink(){
+      // substitua o '#' abaixo pelo seu link de pagamento real
+      var link = '#PAYMENT_LINK';
+      if(link === '#' || link === '') {
+        alert('Você ainda não configurou o link de pagamento. Escolha PIX/transferência ou fale no WhatsApp.');
+        return;
+      }
+      window.open(link, '_blank');
+    }
+    function showPix(){
+      document.getElementById('pixArea').style.display = 'block';
+    }
+    function contactWhats(){
+      window.open('https://wa.me/YOUR_WHATSAPP_NUMBER?text=Ol%C3%A1%2C%20quero%20garantir%20minha%20vaga%20no%204%20Esta%C3%A7%C3%B5es', '_blank');
+    }
+    // fechar modal ao clicar fora
+    document.getElementById('payModal').addEventListener('click', function(e){
+      if(e.target === this) closeModal();
+    });
+  </script>
+</body>
+</html>

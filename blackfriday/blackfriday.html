@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black da Nutri — Programa 4 Estações</title>
+  <style>
+    :root{--bg:#0e0e0e;--card:#151515;--accent:#c8a2c8;--gold:#d4af37;--muted:#cfcfcf}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter, Poppins, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;background:var(--bg);color:#fff}
+    .wrap{max-width:1100px;margin:0 auto;padding:40px 20px}
+    .hero{display:flex;gap:30px;align-items:center;justify-content:space-between;padding:40px;border-radius:12px}
+    .hero-left{flex:1}
+    .brand{display:flex;align-items:center;gap:16px}
+    .brand img{width:92px;height:92px;object-fit:contain;border-radius:12px}
+    h1{color:var(--gold);margin:6px 0;font-size:2rem}
+    p.lead{color:var(--muted);margin-bottom:18px}
+    .btn{background:var(--accent);color:#0e0e0e;padding:14px 22px;border-radius:999px;display:inline-block;font-weight:700;text-decoration:none}
+
+    /* sections */
+    section{margin:28px 0}
+    .card{background:var(--card);border-radius:12px;padding:22px;box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+    h2{color:var(--gold);margin-bottom:14px}
+    ul{padding-left:18px}
+    li{margin:8px 0;color:var(--muted)}
+
+    /* etapas grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .stage{background:#1b1b1b;padding:16px;border-radius:10px}
+
+    /* quem sou eu */
+    .about{display:flex;gap:18px;align-items:center}
+    .about img{width:170px;height:170px;border-radius:12px;object-fit:cover}
+    .about p{color:var(--muted)}
+
+    /* testimonials carousel */
+    .testi-wrap{position:relative}
+    .testi{min-height:120px;display:flex;align-items:center;justify-content:center;padding:18px}
+    .stars{color:#ffd166;margin-bottom:8px}
+    .testi p{color:var(--muted);max-width:900px;text-align:center}
+    .testi-count, .testi-note{text-align:center;color:var(--muted);font-size:0.9rem;margin-top:10px}
+
+    /* CTA */
+    .cta{display:flex;flex-direction:column;align-items:center;gap:12px}
+    .price{font-size:1.2rem;color:var(--gold);font-weight:700}
+
+    footer{padding:28px;text-align:center;color:#9a9a9a;font-size:0.9rem}
+
+    /* whatsapp float */
+    .whatsapp{position:fixed;right:20px;bottom:20px;background:#25d366;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;text-decoration:none;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.4)}
+
+    /* responsive tweaks */
+    @media(max-width:800px){.hero{flex-direction:column;align-items:flex-start}.about{flex-direction:column;align-items:flex-start}.brand img{width:80px;height:80px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-left">
+        <div class="brand">
+          <!-- Programa 4 Estações - coloque o arquivo do logo em /assets/4estacoes.png -->
+            <img src="/img/4estacoes.png" alt="Programa 4 Estações logo showing the program name Programa 4 Estações with decorative motifs representing the four seasons: autumn, winter, spring and summer; static emblem used in the page header to identify the program on a dark promotional background; tone is warm, supportive and uplifting" id="logo-4estacoes" />
+          <div>
+            <h1>Black da Nutri — Programa 4 Estações</h1>
+            <p class="lead">Transforme sua vida com <strong>emagrecimento definitivo</strong>, sem dietas restritivas, sem fome e sem estresse.</p>
+            <a class="btn" id="main-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSc0qJiOX1pYQOmL4YkK9a-LgC4zGimBNizIO8b96U_LpHysTA/viewform?usp=header">Garantir minha vaga agora</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENEFÍCIOS -->
+    <section class="card">
+      <h2>✨ Benefícios do Programa</h2>
+      <ul>
+        <li>Plano alimentar personalizado que respeita sua rotina e preferências</li>
+        <li>Acompanhamento semanal via WhatsApp com feedback prático</li>
+        <li>Diário alimentar com análise e ajustes — apoio humano e técnico</li>
+        <li>Aplicativo / materiais com receitas, listas de compras e metas</li>
+        <li>Ferramentas comportamentais para lidar com ansiedade e sabotadores</li>
+        <li>1 sessão com psicóloga parceira + e-book de receitas (bônus Black)</li>
+        <li>1 mês de consultoria com personal trainer (bônus Black)</li>
+      </ul>
+    </section>
+
+    <!-- ETAPAS -->
+    <section>
+      <h2>🌿 As 4 Estações (como funciona)</h2>
+      <div class="grid">
+        <div class="stage card">
+          <h3>🍂 Outono — Preparação</h3>
+          <p>Histórico de saúde, cardápio desinflamatório e plano de ação para preparar seu corpo.</p>
+        </div>
+        <div class="stage card">
+          <h3>❄ Inverno — Autoconhecimento</h3>
+          <p>Descoberta dos sabotadores e estratégias para fortalecer seu comportamento.</p>
+        </div>
+        <div class="stage card">
+          <h3>🌷 Primavera — Queima de Gordura</h3>
+          <p>Ativação do metabolismo com cardápios e ações práticas para resultados.</p>
+        </div>
+        <div class="stage card">
+          <h3>☀ Verão — Manutenção</h3>
+          <p>Plano de manutenção e autonomia para manter os resultados com liberdade.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUEM SOU EU -->
+    <section class="card about">
+      <!-- Substitua o caminho da imagem por /assets/luciana.jpg -->
+      <img src="/img/img-lu0001.jpg" alt="Luciana Francisco - Nutricionista" />
+      <div>
+        <h2>Quem sou eu</h2>
+        <p>Sou <strong>Luciana Francisco</strong>, nutricionista e pós-graduanda em Nutrição Clínica (USP). Especialista em emagrecimento e trato a obesidade como o que ela realmente é: uma doença que precisa de cuidado, estratégia e humanidade. Meu atendimento é próximo, personalizado e focado em resultados sustentáveis.</p>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS (carrossel automático) -->
+    <section class="card testi-wrap">
+      <h2>⭐ Depoimentos (Google Meu Negócio)</h2>
+      <div id="testi" class="testi">
+        <!-- O conteúdo será injetado por JavaScript. -->
+      <p class="testi-count">Mais de 13 avaliações reais — qualidade e cuidado que transformam.</p>
+      <p class="testi-note">Mais de 13 avaliações reais — qualidade e cuidado que transformam.</p>
+    </section>
+
+    <!-- OFERTA / BÔNUS -->
+    <section class="card">
+      <h2>🎁 Oferta Black da Nutri — Vagas Limitadas</h2>
+      <ul>
+        <li>6 consultas nutricionais (avaliação + bioimpedância + cardápio personalizado)</li>
+        <li>Acompanhamento semanal pelo WhatsApp</li>
+        <li>Ferramentas práticas para colocar a estratégia em ação</li>
+        <li>1 sessão com psicóloga parceira</li>
+        <li>1 mês de consultoria com personal trainer (bônus Black)</li>
+        <li>E-book de receitas exclusivo</li>
+        
+      </ul>
+      <p class="price">De R$ 1.500,00 Por apenas <strong>R$ 1.020,00</strong></p>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="card cta">
+      <h2>Quer ser a sua própria musa do verão?</h2>
+      <p>Vagas reduzidas para garantir um acompanhamento próximo e transformador.</p>
+      <a class="btn" id="main-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSc0qJiOX1pYQOmL4YkK9a-LgC4zGimBNizIO8b96U_LpHysTA/viewform?usp=header">Garantir minha vaga agora</a>
+    </section>
+
+    <footer>
+      <p>© 2025 Luciana Francisco Nutricionista — CRN: 83378/P. Todos os direitos reservados.</p>
+    </footer>
+
+  </div>
+
+  <!-- WhatsApp flutuante -->
+  <a class="whatsapp" href="https://wa.me/5513991323385?text=Ol%C3%A1%20Luciana!%20Quero%20garantir%20minha%20vaga%20no%20Programa%204%20Esta%C3%A7%C3%B5es%20da%20Black%20da%20Nutri%21" target="_blank" rel="noopener noreferrer">💬</a>
+
+  <script>
+    /* ---------- CONFIGURAÇÃO RÁPIDA ----------
+       1) Substitua 'LINK_DE_PAGAMENTO_AQUI' pelo seu link da Hotmart ou SumUp
+       2) Faça upload das imagens em /assets/ e ajuste os nomes (4estacoes.png e luciana.jpg)
+       3) Para os depoimentos: se quiser puxar automaticamente do Google, é preciso exportá-los
+          via API/serviço (ou colar manualmente no array abaixo). */
+
+    const PAYMENT_LINK = 'LINK_DE_PAGAMENTO_AQUI'; // <-- cole aqui seu link de pagamento
+
+    function goToPayment(e){
+      e && e.preventDefault && e.preventDefault();
+      if(!PAYMENT_LINK || PAYMENT_LINK.includes('LINK_DE_PAGAMENTO_AQUI')){
+        // fallback: abrir WhatsApp se não houver link configurado
+        window.open('https://wa.me/5513991323385?text=Ol%C3%A1%20Luciana!%20Quero%20garantir%20minha%20vaga%20no%20Programa%204%20Esta%C3%A7%C3%B5es', '_blank');
+        return;
+      }
+      window.location.href = PAYMENT_LINK;
+    }
+
+    /* ---------- Depoimentos ----------
+       Se você já tem 13 depoimentos no Google, cole-os abaixo no formato: {name: 'Nome', stars: 5, text: '...'}
+       Eu deixei 3 exemplos abaixo para você editar. */
+    const testimonials = [
+      {name: 'Mariana O.', stars: 5, text: 'extremamente sensível e com atendimento personalizado, você se sente acolhido desde o início. além do acompanhamento diário para que você tenha uma reeducação alimentar completa. vai muito além de tudo que conheci como nutricionista ♡'},
+      {name: 'Rubia P.', stars: 5, text: 'A Lu é uma nutricionista maravilhosa e humana! Não é daquelas que te deixa com fome kkk mas te ajuda a fazer ótimas escolha para alcançar seu objetivo. Me fez olhar a comida com amor e fazer escolhas corretas.'},
+      {name: 'Sabrina B.', stars: 5, text: 'Excelente profissional! Estou adorando passar com a Lu, nutricionista muito acolhedora, ouve e auxilia nas nossas dúvidas e faz um acompanhamento e plano alimentar super personalizado. Recomendo demais.'},
+      {name: 'Bruna B.', stars: 5, text: 'Nutri maravilhosa. Não te deixa passar fome . Monta um cardápio que você consegue seguir. Além de ser super prestativa e atenciosa. Faz por amor.'},
+      {name: 'Dalila M.', stars: 5, text: 'Parabéns pelo seu trabalho e dedicação! Obrigada por nos ajudar a encontrar o equilíbrio através da alimentação, Você é uma inspiração para todos que buscam uma vida saudável. Nutri, seu carinho é o tempero que faz a alimentação ser mais leve. Você é o exemplo de que cuidar do corpo é também cuidar da alma, Dedicação e carinho fazem toda a diferença na minha jornada por uma vida saudável…'},
+      {name: 'Michele C.', stars: 5, text: 'A Luciana foi um achado! Recomendo muito! Uma ótima profissional como poucas que já conheci. Muito atenciosa, explica tudo perfeitamente e de forma clara e didática! Faz todo o processo ser muito leve e gostoso. Tem uma ótima escuta e é atenta a todos os detalhes, o que torna o atendimento ainda mais personalizado e acolhedor! Consegui resultados muito rápidos e hoje me alimento muito melhor, tenho disposição, perdi peso e obtive resultados que sempre desejei! Ganhei qualidade de vida!'},
+      {name: 'Luis C.', stars: 5, text: 'Gostaria de agradecer à nutricionista Luciana pelo excelente trabalho e dedicação. Sua abordagem atenciosa e personalizada fez toda a diferença para minha saúde e bem-estar. Com suas orientações, consegui entender melhor como me alimentar de forma equilibrada e sustentável, alcançando resultados incríveis. Ela é uma profissional extremamente competente, com conhecimento atualizado e sempre disposta a esclarecer dúvidas. Recomendo de olhos fechados! do depoimento'},
+      {name: 'Mariane M.', stars: 5, text: 'Excelência define a Dra. Luciana. Profissional competente, dedicada e comprometida. Além de ser super atualizada e conhecedora de diversas estratégias de emagrecimento e saúde. Recomendo fortemente a profissional!'},
+      {name: 'Rafael R.', stars: 5, text: 'Excelente profissional, pontual, muito conhecimento e ajuda a gente a conquistas os resultados. Recomendo.'},
+      {name: 'Diego B.', stars: 5, text: 'Otima nutricionista, me ajudou a emagrecer e me fez uma pessoa mais saudável, sem falar que ela e otima com seu trabalho e com suas orientações e nunca deixa os pacientes dela na mão mesmo nas piores situações como a minha antigamente👍.'},
+      {name: 'Daniele O.', stars: 5, text: 'Acredito muito no trabalho multidisciplinar, sou psicóloga e indico ela para muitos dos meus pacientes. Ela e sensível, traz um atendimento individualizado e realista! Excelente profissional!'},
+      {name: 'Everson C.', stars: 5, text: 'Ótima nutricionista me atendeu super bem, super atenciosa paciente e dedicada, muito boa, sempre que preciso ela está a disposição, super recomendo!!!!!'},
+      {name: 'Kamilly V.', stars: 5, text: 'Minha experiência não poderia ser melhor, sinto- me super confiante e bem comigo mesma, além de ótima profissional é super simpática e humana. Recomendo muito!'},
+      /*
+      Cole aqui os outros depoimentos, por exemplo:
+      {name: 'Nome', stars: 5, text: 'Texto do depoimento'},
+      */
+    ];
+
+    // render do carrossel simples (ciclo automático)
+    const testiEl = document.getElementById('testi');
+    let idx = 0;
+    function renderTestimonial(i){
+      const t = testimonials[i];
+      if(!t) return testiEl.innerHTML = '<p style="color:var(--muted)">Nenhum depoimento disponível.</p>';
+      const stars = '★'.repeat(t.stars) + '☆'.repeat(5 - t.stars);
+      testiEl.innerHTML = `\n        <div style=\"text-align:center;max-width:900px\">\n          <div class=\"stars\">${stars}</div>\n          <p>“${t.text}”</p>\n          <div style=\"margin-top:8px;color:var(--muted);font-size:0.9rem\">— ${t.name}</div>\n        </div>\n      `;
+    }
+    function nextTesti(){ idx = (idx + 1) % testimonials.length; renderTestimonial(idx); }
+    // inicializa
+    if(testimonials.length) renderTestimonial(0);
+    // auto-cycle a cada 4s
+    setInterval(()=>{ if(testimonials.length>1) nextTesti(); }, 4000);
+
+    /* DICA: para importar automaticamente as 13 avaliações do Google se quiser automatizar no futuro:
+       - exporte suas avaliações do Google Meu Negócio (via Google Takeout ou scripts que usem a API Places),
+       - converta em um array JSON no formato acima e cole no 'testimonials'.
+    */
+  </script>
+</body>
+</html>
